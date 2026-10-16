@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7b294b">
+<title>Una pequeña sorpresa para Belu 💌</title>
+<style>
+  :root{--wine:#7b294b;--rose:#c66b86;--cream:#fff8f0;--ink:#4d2832;--gold:#d9b777}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(circle at top,#fff4f5 0,#f8e5e9 45%,#efd4db 100%);overflow-x:hidden}
+  .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .heart{position:absolute;bottom:-40px;color:#c66b8666;animation:floatUp linear infinite;font-size:20px}
+  @keyframes floatUp{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+  main{position:relative;z-index:1;width:min(92%,760px);margin:0 auto;padding:34px 0 50px}
+  .screen{display:none;animation:appear .65s ease both}
+  .screen.active{display:block}
+  @keyframes appear{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .welcome{min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+  .eyebrow{letter-spacing:.22em;text-transform:uppercase;font:12px Arial,sans-serif;color:#a65c73}
+  h1{font-size:clamp(42px,10vw,72px);color:var(--wine);margin:14px 0 8px;font-weight:normal;text-shadow:0 2px #fff}
+  .subtitle{font-size:18px;margin:0 0 28px;color:#815260}
+  .panel{background:#fffaf7d9;border:1px solid #e9cbd1;border-radius:22px;padding:clamp(22px,5vw,38px);box-shadow:0 18px 50px #7b294b18;width:100%;max-width:540px}
+  .question{font-size:21px;line-height:1.45;margin:0 0 18px}
+  input{width:100%;padding:15px 16px;border:1px solid #ddb7c1;border-radius:12px;background:#fff;font-size:17px;color:var(--ink);outline:none}
+  input:focus{border-color:var(--rose);box-shadow:0 0 0 3px #c66b8625}
+  button{font-family:Arial,sans-serif;font-size:15px;border:0;border-radius:999px;padding:13px 23px;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+  button:hover{transform:translateY(-2px)}
+  .primary{background:var(--wine);color:white;box-shadow:0 7px 18px #7b294b2c}
+  .primary:hover{background:#64203c}
+  .soft{background:#f7e6eb;color:var(--wine)}
+  .full{width:100%;margin-top:13px}
+  .error{min-height:23px;color:#b42345;font:14px Arial,sans-serif;margin:10px 0 0}
+  .letter-wrap{padding:10px}
+  .letter{position:relative;background:linear-gradient(135deg,#fff9e9,#f8edcf);padding:clamp(25px,6vw,54px);border:1px solid #d6bc85;box-shadow:0 15px 40px #5b2a321f;color:#4b352b}
+  .letter:before{content:"";position:absolute;inset:9px;border:1px solid #d9c79e;pointer-events:none}
+  .stamp{font-size:32px;text-align:center;margin:0 0 10px}
+  .letter h2{text-align:center;font-weight:normal;font-size:clamp(26px,5vw,38px);margin:0 0 24px;color:#7b294b}
+  .letter p{font-size:clamp(16px,2.6vw,19px);line-height:1.85;margin:0 0 16px}
+  .signoff{text-align:center;font-style:italic;margin-top:26px!important}
+  .arrow-row{text-align:center;margin:24px 0 0}
+  .arrow{width:58px;height:58px;border-radius:50%;font-size:26px;padding:0;background:var(--wine);color:white;box-shadow:0 8px 20px #7b294b35}
+  .hint{font:13px Arial,sans-serif;color:#966a77;margin-top:12px}
+  .poll{text-align:center;padding:clamp(26px,6vw,48px)}
+  .icecream{font-size:48px;margin-bottom:6px}
+  .poll h2{font-size:clamp(29px,7vw,44px);font-weight:normal;color:var(--wine);margin:8px 0 12px}
+  .poll p{font-size:18px;line-height:1.6}
+  .choices{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
+  .choice{min-width:130px;font-size:17px}
+  .yes{background:#7b294b;color:white}
+  .no{background:#f4e3e8;color:#7b294b}
+  .response{min-height:30px;font-size:17px;color:var(--wine);margin-top:18px}
+  .tiny{font:12px Arial,sans-serif;color:#9a6f7b;margin-top:28px}
+  @media(max-width:480px){main{padding-top:18px}.question{font-size:19px}.choices{gap:10px}.choice{min-width:120px}}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts" aria-hidden="true"></div>
+<main>
+  <section class="screen active welcome" id="welcome">
+    <div class="eyebrow">Una pequeña sorpresa para ti</div>
+    <h1>HOLA BELU</h1>
+    <p class="subtitle">He preparado algo con mucho cariño ♡</p>
+    <div class="panel">
+      <p class="question">¿De qué color era mi camiseta el día que nos conocimos?</p>
+      <form id="answerForm">
+        <input id="answer" type="text" placeholder="Escribe aquí tu respuesta..." autocomplete="off" aria-label="Respuesta a la pregunta">
+        <button class="primary full" id="answerButton" type="submit">Descubrir la sorpresa ✨</button>
+        <p class="error" id="error" aria-live="polite"></p>
+      </form>
+    </div>
+    <p class="tiny">Hecho especialmente para Belu · 16.10.2026</p>
+  </section>
+
+  <section class="screen" id="letterScreen">
+    <div class="letter-wrap">
+      <article class="letter">
+        <div class="stamp">✉️ ♡ ✉️</div>
+        <h2>Una invitación para usted, bella dama</h2>
+        <p>Hola, Belu:</p>
+        <p>Es un honor para mí dirigirme hacia ti el día de hoy. Primero quiero que sepas que me divertí mucho haciéndote esto JSJSJSJS.</p>
+        <p>Bueno, ahora sí, señorita Belu: este hombre, al que apenas conoces, siente la necesidad de conocerte un poco más, ya que le pareces una chica muy especial y le llamas la atención.</p>
+        <p>Para esto, este caballero, que no porta más que buenas intenciones contigo y está dispuesto a conquistarte de la mejor manera, quiere el día de hoy, 16 de octubre del año 2026, realizarte una formal invitación para que sigamos realizando aquello que se llama <em>conocerse</em>.</p>
+        <p>El emocionante y simple evento sería ir a comer helado. Este acontecimiento puede sonar sencillo, pero para el humilde hidalgo cualquier actividad con usted, bella dama, sería algo inverosímil y utópico.</p>
+        <p>Para este noble hombre sería muy gratificante llevar a cabo dicha actividad contigo.</p>
+        <p class="signoff">Se le agradece por su discernimiento y benevolencia,<br>a ti, sublime dama. ♡</p>
+      </article>
+    </div>
+    <div class="arrow-row">
+      <button class="arrow" id="toPoll" aria-label="Ir a la invitación final" title="Continuar">↓</button>
+      <div class="hint">Hay una última cosita para ti…</div>
+    </div>
+  </section>
+
+  <section class="screen" id="pollScreen">
+    <div class="panel poll">
+      <div class="icecream">🍦</div>
+      <div class="eyebrow">La pregunta más importante</div>
+      <h2>Entonces, Belu…</h2>
+      <p>¿Me concederías el honor de ir a comer un heladito contigo? 💗</p>
+      <div class="choices">
+        <button class="choice yes" id="yesBtn">¡Siii! 🍦💕</button>
+        <button class="choice no" id="noBtn">No 🙈</button>
+      </div>
+      <div class="response" id="response" aria-live="polite"></div>
+      <p class="tiny">Prometo buena conversación y helado rico. ♡</p>
+    </div>
+  </section>
+</main>
+<script>
+  const hearts = document.getElementById('hearts');
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement('span');
+    h.className = 'heart';
+    h.textContent = ['♡','♥','✧'][i % 3];
+    h.style.left = (Math.random() * 100) + '%';
+    h.style.animationDuration = (9 + Math.random() * 12) + 's';
+    h.style.animationDelay = (-Math.random() * 18) + 's';
+    h.style.fontSize = (14 + Math.random() * 18) + 'px';
+    hearts.appendChild(h);
+  }
+  const show = id => {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  function checkAnswer(e) {
+    if (e) e.preventDefault();
+    const input = document.getElementById('answer');
+    const value = input.value.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    if (value === 'negra') {
+      document.getElementById('error').textContent = '';
+      show('letterScreen');
+    } else {
+      document.getElementById('error').textContent = 'Mmm, intenta otra vez, Belu 💗';
+      input.focus();
+    }
+  }
+  document.getElementById('answerForm').addEventListener('submit', checkAnswer);
+  document.getElementById('answerButton').addEventListener('click', checkAnswer);
+  document.getElementById('toPoll').addEventListener('click', () => show('pollScreen'));
+  document.getElementById('yesBtn').addEventListener('click', () => {
+    document.getElementById('response').textContent = '¡Yujuuu! 🥹💕 Queda oficialmente pendiente nuestro heladito.';
+    document.getElementById('yesBtn').textContent = '¡Plan hecho! 🍦';
+  });
+  // The "No" choice remains available. A playful message keeps the moment light
+  // without preventing Belu from making her own choice.
+  document.getElementById('noBtn').addEventListener('click', () => {
+    document.getElementById('response').textContent = 'Jajaja, está bien 💗. La invitación queda abierta si algún día te animas.';
+  });
+</script>
+</body>
+</html>
